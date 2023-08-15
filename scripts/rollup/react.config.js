@@ -1,5 +1,5 @@
 import { getBaseRollupPlugins, getPackageJson, resolvePkgPath } from "./utils"
-import path from 'path';
+import generatePackageJson from "rollup-plugin-generate-package-json";
 
 const { name, module} = getPackageJson('react');
 // react 包的路径
@@ -15,7 +15,19 @@ export default [
       name: 'index.js',
       format: 'umd',
     },
-    plugins: getBaseRollupPlugins(),
+    plugins: [
+      ...getBaseRollupPlugins(),
+      generatePackageJson({
+        inputFolder: pkgPath,
+        outputFolder: pkgDistPath,
+        baseContents: ({name, description, version}) => ({
+          name,
+          description,
+          version,
+          main: 'index.js', // 支持 umd 所以需要 main
+        })
+      })
+    ]
   },
   // jsx-runtime
   {
