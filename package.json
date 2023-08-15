@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./packages",
-    "build:dev": "rollup --bundleConfigAsCjs -c ./scripts/rollup/react.config.js"
+    "build:dev": "rimraf dist && rollup --bundleConfigAsCjs -c ./scripts/rollup/react.config.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +22,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "prettier": "^3.0.1",
+    "rimraf": "^5.0.1",
     "rollup": "^3.28.0",
     "rollup-plugin-typescript2": "^0.35.0"
   },
