@@ -1,5 +1,6 @@
 import { Key, Props, Ref } from 'shared/ReactTypes';
 import { WorkTag } from './workTags';
+import { Flags, NoFlags } from './fiberFlags';
 
 export class FiberNode {
 	tag: number;
@@ -15,6 +16,8 @@ export class FiberNode {
 
 	index: number;
 	memoizedProps: Props | null;
+	alternate: FiberNode | null;
+	flags: Flags;
 
 	constructor(tag: WorkTag, pendingProps: Props, key: Key) {
 		this.tag = tag;
@@ -38,5 +41,9 @@ export class FiberNode {
 		// 作为工作单元
 		this.pendingProps = pendingProps;
 		this.memoizedProps = null;
+
+		this.alternate = null;
+		// 副作用
+		this.flags = NoFlags;
 	}
 }
